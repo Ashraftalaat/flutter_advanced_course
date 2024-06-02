@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../../core/networking/api_error_handler.dart';
 import '../data/models/specializations_response_model.dart';
 
 part 'home_state.freezed.dart';
@@ -9,5 +10,5 @@ class HomeState with _$HomeState {
   
   const factory HomeState.specializationsLoading() = SpecializationsLoading;
   const factory HomeState.specializationsSuccess(SpecializationsResponseModel specializationsResponseModel) = SpecializationsSuccess;
-  const factory HomeState.specializationsError({required String error}) = SpecializationsError;
+  const factory HomeState.specializationsError({required ErrorHandler errorHandler}) = SpecializationsError;
 }

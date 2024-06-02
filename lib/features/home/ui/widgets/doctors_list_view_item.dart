@@ -3,9 +3,11 @@ import 'package:flutter_complete_project/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/styles.dart';
+import '../../data/models/specializations_response_model.dart';
 
 class DoctorsListViewItem extends StatelessWidget {
-  const DoctorsListViewItem({super.key});
+  final Doctors? doctorsModel;
+  const DoctorsListViewItem({super.key, required this.doctorsModel});
 
   @override
   Widget build(BuildContext context) {
@@ -26,28 +28,30 @@ class DoctorsListViewItem extends StatelessWidget {
             ),
           ),
           horizontalSpace(16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Dr. Randy Wigham',
-                style: TextStyles.font18DarkBlueBold,
-              ),
-              verticalSpace(5),
-              Text(
-                'Specialist | +1 (352) 660-1282',
-                style: TextStyles.font12GrayMedium,
-              ),
-              verticalSpace(5),
-              Text(
-                'mann.ubaldo@example.net',
-                style: TextStyles.font12GrayMedium,
-              ),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  doctorsModel?.name ?? 'Name',
+                  style: TextStyles.font18DarkBlueBold,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                verticalSpace(5),
+                Text(
+                  '${doctorsModel?.degree} | ${doctorsModel?.phone}',
+                  style: TextStyles.font12GrayMedium,
+                ),
+                verticalSpace(5),
+                Text(
+                  doctorsModel?.email ?? 'Email',
+                  style: TextStyles.font12GrayMedium,
+                ),
+              ],
+            ),
           ),
         ],
       ),
     );
-    ;
   }
 }

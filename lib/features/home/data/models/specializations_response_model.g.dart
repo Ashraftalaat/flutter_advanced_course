@@ -48,6 +48,7 @@ Doctors _$DoctorsFromJson(Map<String, dynamic> json) => Doctors(
       photo: json['photo'] as String?,
       gender: json['gender'] as String?,
       price: json['appoint_price'] as int?,
+      degree: json['degree'] as String,
     );
 
 Map<String, dynamic> _$DoctorsToJson(Doctors instance) => <String, dynamic>{
@@ -58,4 +59,5 @@ Map<String, dynamic> _$DoctorsToJson(Doctors instance) => <String, dynamic>{
       'photo': instance.photo,
       'gender': instance.gender,
       'appoint_price': instance.price,
+      'degree': instance.degree,
     };

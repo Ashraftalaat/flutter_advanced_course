@@ -23,7 +23,7 @@ mixin _$HomeState {
     required TResult Function(
             SpecializationsResponseModel specializationsResponseModel)
         specializationsSuccess,
-    required TResult Function(String error) specializationsError,
+    required TResult Function(ErrorHandler errorHandler) specializationsError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,7 +33,7 @@ mixin _$HomeState {
     TResult? Function(
             SpecializationsResponseModel specializationsResponseModel)?
         specializationsSuccess,
-    TResult? Function(String error)? specializationsError,
+    TResult? Function(ErrorHandler errorHandler)? specializationsError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,7 +42,7 @@ mixin _$HomeState {
     TResult Function()? specializationsLoading,
     TResult Function(SpecializationsResponseModel specializationsResponseModel)?
         specializationsSuccess,
-    TResult Function(String error)? specializationsError,
+    TResult Function(ErrorHandler errorHandler)? specializationsError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -135,7 +135,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(
             SpecializationsResponseModel specializationsResponseModel)
         specializationsSuccess,
-    required TResult Function(String error) specializationsError,
+    required TResult Function(ErrorHandler errorHandler) specializationsError,
   }) {
     return initial();
   }
@@ -148,7 +148,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(
             SpecializationsResponseModel specializationsResponseModel)?
         specializationsSuccess,
-    TResult? Function(String error)? specializationsError,
+    TResult? Function(ErrorHandler errorHandler)? specializationsError,
   }) {
     return initial?.call();
   }
@@ -160,7 +160,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? specializationsLoading,
     TResult Function(SpecializationsResponseModel specializationsResponseModel)?
         specializationsSuccess,
-    TResult Function(String error)? specializationsError,
+    TResult Function(ErrorHandler errorHandler)? specializationsError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -259,7 +259,7 @@ class _$SpecializationsLoadingImpl implements SpecializationsLoading {
     required TResult Function(
             SpecializationsResponseModel specializationsResponseModel)
         specializationsSuccess,
-    required TResult Function(String error) specializationsError,
+    required TResult Function(ErrorHandler errorHandler) specializationsError,
   }) {
     return specializationsLoading();
   }
@@ -272,7 +272,7 @@ class _$SpecializationsLoadingImpl implements SpecializationsLoading {
     TResult? Function(
             SpecializationsResponseModel specializationsResponseModel)?
         specializationsSuccess,
-    TResult? Function(String error)? specializationsError,
+    TResult? Function(ErrorHandler errorHandler)? specializationsError,
   }) {
     return specializationsLoading?.call();
   }
@@ -284,7 +284,7 @@ class _$SpecializationsLoadingImpl implements SpecializationsLoading {
     TResult Function()? specializationsLoading,
     TResult Function(SpecializationsResponseModel specializationsResponseModel)?
         specializationsSuccess,
-    TResult Function(String error)? specializationsError,
+    TResult Function(ErrorHandler errorHandler)? specializationsError,
     required TResult orElse(),
   }) {
     if (specializationsLoading != null) {
@@ -412,7 +412,7 @@ class _$SpecializationsSuccessImpl implements SpecializationsSuccess {
     required TResult Function(
             SpecializationsResponseModel specializationsResponseModel)
         specializationsSuccess,
-    required TResult Function(String error) specializationsError,
+    required TResult Function(ErrorHandler errorHandler) specializationsError,
   }) {
     return specializationsSuccess(specializationsResponseModel);
   }
@@ -425,7 +425,7 @@ class _$SpecializationsSuccessImpl implements SpecializationsSuccess {
     TResult? Function(
             SpecializationsResponseModel specializationsResponseModel)?
         specializationsSuccess,
-    TResult? Function(String error)? specializationsError,
+    TResult? Function(ErrorHandler errorHandler)? specializationsError,
   }) {
     return specializationsSuccess?.call(specializationsResponseModel);
   }
@@ -437,7 +437,7 @@ class _$SpecializationsSuccessImpl implements SpecializationsSuccess {
     TResult Function()? specializationsLoading,
     TResult Function(SpecializationsResponseModel specializationsResponseModel)?
         specializationsSuccess,
-    TResult Function(String error)? specializationsError,
+    TResult Function(ErrorHandler errorHandler)? specializationsError,
     required TResult orElse(),
   }) {
     if (specializationsSuccess != null) {
@@ -503,7 +503,7 @@ abstract class _$$SpecializationsErrorImplCopyWith<$Res> {
           $Res Function(_$SpecializationsErrorImpl) then) =
       __$$SpecializationsErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String error});
+  $Res call({ErrorHandler errorHandler});
 }
 
 /// @nodoc
@@ -517,13 +517,13 @@ class __$$SpecializationsErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = null,
+    Object? errorHandler = null,
   }) {
     return _then(_$SpecializationsErrorImpl(
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String,
+      errorHandler: null == errorHandler
+          ? _value.errorHandler
+          : errorHandler // ignore: cast_nullable_to_non_nullable
+              as ErrorHandler,
     ));
   }
 }
@@ -531,14 +531,14 @@ class __$$SpecializationsErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SpecializationsErrorImpl implements SpecializationsError {
-  const _$SpecializationsErrorImpl({required this.error});
+  const _$SpecializationsErrorImpl({required this.errorHandler});
 
   @override
-  final String error;
+  final ErrorHandler errorHandler;
 
   @override
   String toString() {
-    return 'HomeState.specializationsError(error: $error)';
+    return 'HomeState.specializationsError(errorHandler: $errorHandler)';
   }
 
   @override
@@ -546,11 +546,12 @@ class _$SpecializationsErrorImpl implements SpecializationsError {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SpecializationsErrorImpl &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.errorHandler, errorHandler) ||
+                other.errorHandler == errorHandler));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, errorHandler);
 
   @JsonKey(ignore: true)
   @override
@@ -568,9 +569,9 @@ class _$SpecializationsErrorImpl implements SpecializationsError {
     required TResult Function(
             SpecializationsResponseModel specializationsResponseModel)
         specializationsSuccess,
-    required TResult Function(String error) specializationsError,
+    required TResult Function(ErrorHandler errorHandler) specializationsError,
   }) {
-    return specializationsError(error);
+    return specializationsError(errorHandler);
   }
 
   @override
@@ -581,9 +582,9 @@ class _$SpecializationsErrorImpl implements SpecializationsError {
     TResult? Function(
             SpecializationsResponseModel specializationsResponseModel)?
         specializationsSuccess,
-    TResult? Function(String error)? specializationsError,
+    TResult? Function(ErrorHandler errorHandler)? specializationsError,
   }) {
-    return specializationsError?.call(error);
+    return specializationsError?.call(errorHandler);
   }
 
   @override
@@ -593,11 +594,11 @@ class _$SpecializationsErrorImpl implements SpecializationsError {
     TResult Function()? specializationsLoading,
     TResult Function(SpecializationsResponseModel specializationsResponseModel)?
         specializationsSuccess,
-    TResult Function(String error)? specializationsError,
+    TResult Function(ErrorHandler errorHandler)? specializationsError,
     required TResult orElse(),
   }) {
     if (specializationsError != null) {
-      return specializationsError(error);
+      return specializationsError(errorHandler);
     }
     return orElse();
   }
@@ -643,10 +644,10 @@ class _$SpecializationsErrorImpl implements SpecializationsError {
 }
 
 abstract class SpecializationsError implements HomeState {
-  const factory SpecializationsError({required final String error}) =
-      _$SpecializationsErrorImpl;
+  const factory SpecializationsError(
+      {required final ErrorHandler errorHandler}) = _$SpecializationsErrorImpl;
 
-  String get error;
+  ErrorHandler get errorHandler;
   @JsonKey(ignore: true)
   _$$SpecializationsErrorImplCopyWith<_$SpecializationsErrorImpl>
       get copyWith => throw _privateConstructorUsedError;

@@ -42,6 +42,7 @@ class Doctors {
   String? gender;
   @JsonKey(name: 'appoint_price')
   int? price;
+  String degree;
 
   Doctors({
     this.id,
@@ -51,6 +52,7 @@ class Doctors {
     this.photo,
     this.gender,
     this.price,
+    required this.degree,
   });
 
   factory Doctors.fromJson(Map<String, dynamic> json) =>
