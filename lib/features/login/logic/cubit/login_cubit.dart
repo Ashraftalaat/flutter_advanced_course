@@ -19,15 +19,15 @@ class LoginCubit extends Cubit<LoginState> {
     emit(const LoginState.loading());
     final response = await _loginRepo.login(
       LoginRequestBody(
-        email: emailController.text,
-        password: passwordController.text,
+        email: '',
+        password: '',
       ),
     );
     response.when(success: (loginResponse) async {
       await saveUserToken(loginResponse.userData?.token ?? '');
       emit(LoginState.success(loginResponse));
-    }, failure: (error) {
-      emit(LoginState.error(error: error.apiErrorModel.message ?? ''));
+    }, failure: (apiErrorModel) {
+      emit(LoginState.error(apiErrorModel));
     });
   }
 

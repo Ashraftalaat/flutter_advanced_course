@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_complete_project/core/theming/styles.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../logic/home_cubit.dart';
@@ -27,7 +28,8 @@ class SpecializationsBlocBuilder extends StatelessWidget {
               var specializationsList = specializationDataList;
               return setupSuccess(specializationsList);
             },
-            specializationsError: (errorHandler) => setupError(),
+            specializationsError: (apiErrorModel) =>
+                setupError(apiErrorModel.message.toString()),
             orElse: () {
               return const SizedBox.shrink();
             });
@@ -54,7 +56,11 @@ class SpecializationsBlocBuilder extends StatelessWidget {
     );
   }
 
-  Widget setupError() {
-    return const SizedBox.shrink();
+  Widget setupError(String errorMessage) {
+    return Center(
+        child: Text(
+      errorMessage,
+      style: TextStyles.font15DarkBlueMedium,
+    ));
   }
 }

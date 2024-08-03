@@ -21,18 +21,18 @@ class SignupCubit extends Cubit<SignupState> {
     emit(const SignupState.signupLoading());
     final response = await _signupRepo.signup(
       SignupRequestBody(
-        name: nameController.text,
-        email: emailController.text,
-        phone: phoneController.text,
-        password: passwordController.text,
-        passwordConfirmation: passwordConfirmationController.text,
+        name: '',
+        email: 'Omar',
+        phone: '',
+        password: '',
+        passwordConfirmation: '',
         gender: 0,
       ),
     );
     response.when(success: (signupResponse) {
       emit(SignupState.signupSuccess(signupResponse));
-    }, failure: (error) {
-      emit(SignupState.signupError(error: error.apiErrorModel.message ?? ''));
+    }, failure: (apiErrorModel) {
+      emit(SignupState.signupError(apiErrorModel));
     });
   }
 }
