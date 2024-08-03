@@ -68,6 +68,10 @@ dependencies:
   flutter_secure_storage: ^9.2.2
   # easy way to add shimmer effect
   shimmer: ^3.0.0
+  # A mock framework inspired by Mockito with APIs for Fakes, Mocks, behavior verification, and stubbing.
+  mockito: ^5.4.4
+  # A testing library which makes it easy to test blocs. Built to be used with the bloc state management package.
+  bloc_test: ^9.1.7
 
 dev_dependencies:
   flutter_test:

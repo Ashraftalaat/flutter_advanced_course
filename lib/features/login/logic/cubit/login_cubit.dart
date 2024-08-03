@@ -4,10 +4,11 @@ import 'package:flutter_complete_project/core/helpers/constants.dart';
 import 'package:flutter_complete_project/core/helpers/shared_pref_helper.dart';
 import 'package:flutter_complete_project/core/networking/dio_factory.dart';
 import 'package:flutter_complete_project/features/login/data/models/login_request_body.dart';
+import 'package:flutter_complete_project/features/login/data/models/login_response.dart';
 import 'package:flutter_complete_project/features/login/data/repos/login_repo.dart';
 import 'package:flutter_complete_project/features/login/logic/cubit/login_state.dart';
 
-class LoginCubit extends Cubit<LoginState> {
+class LoginCubit extends Cubit<LoginState<LoginResponse>> {
   final LoginRepo _loginRepo;
   LoginCubit(this._loginRepo) : super(const LoginState.initial());
 
@@ -16,7 +17,8 @@ class LoginCubit extends Cubit<LoginState> {
   final formKey = GlobalKey<FormState>();
 
   void emitLoginStates() async {
-    emit(const LoginState.loading());
+    emit(const LoginState.loginLoading());
+    debugPrint('Emit login states');
     final response = await _loginRepo.login(
       LoginRequestBody(
         email: emailController.text,
@@ -24,10 +26,11 @@ class LoginCubit extends Cubit<LoginState> {
       ),
     );
     response.when(success: (loginResponse) async {
-      await saveUserToken(loginResponse.userData?.token ?? '');
-      emit(LoginState.success(loginResponse));
+      //await saveUserToken(loginResponse.loginUserData?.token ?? '');
+      debugPrint('Emit login success');
+      emit(LoginState.loginSuccess(loginResponse));
     }, failure: (error) {
-      emit(LoginState.error(error: error.apiErrorModel.message ?? ''));
+      emit(LoginState.loginError(error: error.apiErrorModel.message ?? ''));
     });
   }
 
