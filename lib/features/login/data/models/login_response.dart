@@ -1,9 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'login_response.g.dart';
 
+//Model البيانات الراجعة من الـ API
+//login_response: Model بتحدد شكل البيانات اللي هترجع من الـ API
 @JsonSerializable()
 class LoginResponse {
   String? message;
+  // عملنا @JsonKey عشان نغير اسم المفتاح اللي بيحصل من الباك اند
   @JsonKey(name: 'data')
   UserData? userData;
   bool? status;
@@ -18,6 +22,7 @@ class LoginResponse {
 @JsonSerializable()
 class UserData {
   String? token;
+  // عملنا @JsonKey عشان نغير اسم المفتاح اللي بيحصل من الباك اند
   @JsonKey(name: 'username')
   String? userName;
 

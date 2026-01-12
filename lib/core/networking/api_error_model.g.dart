@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// متولد تلقائياً عند اضافة @JsonSerializable()
 
 part of 'api_error_model.dart';
 

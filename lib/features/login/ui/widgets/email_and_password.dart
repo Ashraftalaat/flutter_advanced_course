@@ -33,6 +33,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   }
 
   void setupPasswordControllerListener() {
+    //addListener وظيفتها كل ما نكتب حاجة في التيكيست بن listen عليها
     passwordController.addListener(() {
       setState(() {
         hasLowercase = AppRegex.hasLowerCase(passwordController.text);

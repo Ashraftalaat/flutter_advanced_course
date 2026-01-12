@@ -14,9 +14,11 @@ class LoginBlocListener extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
+      // listenWhen  يعني ابدا اشتغل
       listenWhen: (previous, current) =>
           current is Loading || current is Success || current is Error,
       listener: (context, state) {
+        // state.whenOrNull يعني استخدم واحدة من state اللي موجودة يااما Null
         state.whenOrNull(
           loading: () {
             showDialog(
@@ -28,6 +30,7 @@ class LoginBlocListener extends StatelessWidget {
               ),
             );
           },
+          //loginResponse دة اسم المتغير اللي بيحمل البيانات اللي بيحصل عليها
           success: (loginResponse) {
             context.pop();
             context.pushNamed(Routes.homeScreen);

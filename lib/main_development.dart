@@ -15,7 +15,7 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
   await checkIfLoggedInUser();
   runApp(DocApp(
-    appRouter: AppRouter(),
+    appRouter: AppRouter(), 
   ));
 }
 

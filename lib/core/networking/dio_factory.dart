@@ -6,6 +6,7 @@ import '../helpers/shared_pref_helper.dart';
 
 class DioFactory {
   /// private constructor as I don't want to allow creating an instance of this class
+  // لمنع انشاء مثيل جديد "اوجيكت" من هذه DioFactory
   DioFactory._();
 
   static Dio? dio;
@@ -42,6 +43,7 @@ class DioFactory {
 
   static void addDioInterceptor() {
     dio?.interceptors.add(
+      //PrettyDioLogger لكي يظهر الريكوستات في debug console
       PrettyDioLogger(
         requestBody: true,
         requestHeader: true,
