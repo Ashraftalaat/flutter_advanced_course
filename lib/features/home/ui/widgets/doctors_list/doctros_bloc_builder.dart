@@ -11,6 +11,7 @@ class DoctorsBlocBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
+      //امتي تعمل build in لما الحالة تكون doctorsSuccess او doctorsError
       buildWhen: (previous, current) =>
           current is DoctorsSuccess || current is DoctorsError,
       builder: (context, state) {
@@ -18,8 +19,10 @@ class DoctorsBlocBuilder extends StatelessWidget {
           doctorsSuccess: (doctorsList) {
             return setupSuccess(doctorsList);
           },
-          doctorsError: (errorHandler) => setupError(),
+          doctorsError: () => setupError(),
+          // orElse لو الحالة مش من الاتنين اللي فوق
           orElse: () {
+            //  بترجع shrink box فاضي
             return const SizedBox.shrink();
           },
         );

@@ -22,6 +22,7 @@ void main() async {
 checkIfLoggedInUser() async {
   String? userToken =
       await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
+   //isNullOrEmptyعملناها في extension(bool isNullOrEmpty()=>this == null || this =="";)
   if (!userToken.isNullOrEmpty()) {
     isLoggedInUser = true;
   } else {

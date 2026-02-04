@@ -1,10 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
 
 part 'specializations_response_model.g.dart';
-
+//data شاملة لكل التخصصات 
 @JsonSerializable()
 class SpecializationsResponseModel {
   @JsonKey(name: 'data')
+  //specializationDataList = data الموجودة في  api response
+  // مثل   List data = [];
   List<SpecializationsData?>? specializationDataList;
 
   SpecializationsResponseModel({
@@ -15,6 +17,7 @@ class SpecializationsResponseModel {
       _$SpecializationsResponseModelFromJson(json);
 }
 
+//SpecializationsData الداتا الخاصة بكل تخصص علي حده
 @JsonSerializable()
 class SpecializationsData {
   int? id;
@@ -32,6 +35,7 @@ class SpecializationsData {
       _$SpecializationsDataFromJson(json);
 }
 
+//Doctors الداتا الخاصة بكل دكتور علي حده
 @JsonSerializable()
 class Doctors {
   int? id;

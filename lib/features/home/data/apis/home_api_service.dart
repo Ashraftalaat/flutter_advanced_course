@@ -9,6 +9,8 @@ import 'home_api_constants.dart';
 
 part 'home_api_service.g.dart';
 
+//هنعمل كلاس خاص لل feature/home  عشان نحط فيه ال api service 
+//بدل الكلاس المجمع  ApiService الموجود في core\networking\api_service.dart
 @RestApi(baseUrl : ApiConstants.apiBaseUrl)
 abstract class HomeApiService {
   factory HomeApiService(Dio dio) = _HomeApiService;

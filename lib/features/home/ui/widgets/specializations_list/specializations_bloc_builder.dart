@@ -9,12 +9,15 @@ import 'speciality_list_view.dart';
 import 'speciality_shimmer_loading.dart';
 
 class SpecializationsBlocBuilder extends StatelessWidget {
-  const SpecializationsBlocBuilder({super.key});
+  const  SpecializationsBlocBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
+      //  buildWhen بتقول لل BlocBuilder امتى يعمل إعادة بناء للواجهة
       buildWhen: (previous, current) =>
+      // SpecializationsLoading أو SpecializationsSuccess أو SpecializationsError المولدة
+      //في ملف home_state.freezed.dart لو الحالة الحالية كانت واحدة من الحالات دي
           current is SpecializationsLoading ||
           current is SpecializationsSuccess ||
           current is SpecializationsError,
@@ -28,6 +31,7 @@ class SpecializationsBlocBuilder extends StatelessWidget {
               return setupSuccess(specializationsList);
             },
             specializationsError: (errorHandler) => setupError(),
+            // orElse لو الحالة مش من الحالات اللي فوق
             orElse: () {
               return const SizedBox.shrink();
             });

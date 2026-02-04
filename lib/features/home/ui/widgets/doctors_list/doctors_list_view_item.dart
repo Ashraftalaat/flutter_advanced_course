@@ -24,7 +24,7 @@ class DoctorsListViewItem extends StatelessWidget {
             progressIndicatorBuilder: (context, url, downloadProgress) {
               return Shimmer.fromColors(
                 baseColor: ColorsManager.lightGray,
-                highlightColor: Colors.white,
+                highlightColor: Colors.white, 
                 child: Container(
                   width: 110.w,
                   height: 120.h,

@@ -8,9 +8,7 @@ class DioFactory {
   /// private constructor as I don't want to allow creating an instance of this class
   // لمنع انشاء مثيل جديد "اوجيكت" من هذه DioFactory
   DioFactory._();
-
   static Dio? dio;
-
   static Dio getDio() {
     Duration timeOut = const Duration(seconds: 30);
 

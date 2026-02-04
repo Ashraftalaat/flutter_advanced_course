@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_complete_project/core/helpers/extensions.dart';
+import 'package:flutter_complete_project/core/networking/api_error_model.dart';
 import 'package:flutter_complete_project/features/login/logic/cubit/login_cubit.dart';
 import 'package:flutter_complete_project/features/login/logic/cubit/login_state.dart';
 
@@ -16,11 +17,11 @@ class LoginBlocListener extends StatelessWidget {
     return BlocListener<LoginCubit, LoginState>(
       // listenWhen  يعني ابدا اشتغل
       listenWhen: (previous, current) =>
-          current is Loading || current is Success || current is Error,
+          current is LoginLoading || current is LoginSuccess || current is Error,
       listener: (context, state) {
         // state.whenOrNull يعني استخدم واحدة من state اللي موجودة يااما Null
         state.whenOrNull(
-          loading: () {
+          loginloading: () {
             showDialog(
               context: context,
               builder: (context) => const Center(
@@ -31,12 +32,12 @@ class LoginBlocListener extends StatelessWidget {
             );
           },
           //loginResponse دة اسم المتغير اللي بيحمل البيانات اللي بيحصل عليها
-          success: (loginResponse) {
+          loginsuccess: (loginResponse) {
             context.pop();
             context.pushNamed(Routes.homeScreen);
           },
-          error: (error) {
-            setupErrorState(context, error);
+          loginerror: (apiErrorModel) {
+            setupErrorState(context, apiErrorModel);
           },
         );
       },
@@ -44,18 +45,18 @@ class LoginBlocListener extends StatelessWidget {
     );
   }
 
-  void setupErrorState(BuildContext context, String error) {
+  void setupErrorState(BuildContext context, ApiErrorModel apiErrorModel) {
     context.pop();
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        icon: const Icon(
+        icon:  const Icon(
           Icons.error,
           color: Colors.red,
           size: 32,
         ),
         content: Text(
-          error,
+          apiErrorModel.getAllErrorMessages() ?? 'An error occurred',
           style: TextStyles.font15DarkBlueMedium,
         ),
         actions: [

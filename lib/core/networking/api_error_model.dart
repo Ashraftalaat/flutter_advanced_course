@@ -1,3 +1,4 @@
+import 'package:flutter_complete_project/core/helpers/extensions.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // لازم نعمل part 'api_error_model.g.dart'; عشان دة اسم الملف اللي بتكون فيه الكود اللي بتولد 
@@ -20,14 +21,32 @@ class ApiErrorModel {
   final String? message;
   //code في الباك اند  معموله بال int
   final int? code;
+  @JsonKey(name: "data")
+  final Map<String, dynamic>? errors;
 
   ApiErrorModel({
-    required this.message,
+    this.message,
     this.code,
+    this.errors,
   });
 
   factory ApiErrorModel.fromJson(Map<String, dynamic> json) =>
       _$ApiErrorModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ApiErrorModelToJson(this);
+
+///  بترجع كل الايرور ميسجز في الماب errors
+  String? getAllErrorMessages(){
+if (errors.isNullOrEmpty()) return message ?? "Unknown error occurred";
+      // entry يعني كل عنصر في الماب
+     // entry هو عبارة عن MapEntry<K, V>  اللي هو بيحتوي علي key , value
+     final errorMessage = errors!.entries.map((entry) {
+    // يعني هناخد ال value بتاع  وهو entry الواحد
+     final value =entry.value;
+     return "${value.join(",")}";
+   }).join("\n");
+   
+   return errorMessage;
+}
+  
 }

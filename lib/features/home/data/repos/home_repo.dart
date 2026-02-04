@@ -13,7 +13,12 @@ class HomeRepo {
       final response = await _homeApiService.getSpecialization();
       return ApiResult.success(response);
     } catch (error) {
-      return ApiResult.failure(ErrorHandler.handle(error));
+      // استخدمنا ApiErrorHandler لان وظيفة الريبو هو معرفة نتيجة Api 
+      // هل هو success ام failure
+      // فهو مش عارف هيرجع اية يعني المشكلة من  errors في الباك اند  ولا من فين
+      // لذلك بنرجع الكلاس كله فبيمسك الاول Dioexception هل المشكلة منه ام من 
+      //response  وبعدين بيرجعلي ApiErrorModel
+      return ApiResult.failure(ApiErrorHandler.handle(error));
     }
   }
 }

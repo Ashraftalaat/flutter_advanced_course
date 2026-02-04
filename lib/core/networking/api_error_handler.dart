@@ -3,7 +3,50 @@ import 'package:dio/dio.dart';
 import 'api_constants.dart';
 import 'api_error_model.dart';
 
+class ApiErrorHandler {
+  static ApiErrorModel handle(dynamic error) {
+    // DioException دية الايرور اللي بيجيلنا من Dio اللي انا بمسكها عندي
+    if (error is DioException) {
+      switch (error.type) {
+        case DioExceptionType.connectionError:
+          return ApiErrorModel(message: "Connection to server failed");
+        case DioExceptionType.cancel:
+          return ApiErrorModel(message: "Request to the server was cancelled");
+        case DioExceptionType.connectionTimeout:
+          return ApiErrorModel(message: "Connection timeout with the server");
+        case DioExceptionType.unknown:
+          return ApiErrorModel(
+            message:
+                "Connection to the server failed due to internet connection");
+        case DioExceptionType.receiveTimeout:
+          return ApiErrorModel(
+            message: "Receive timeout in connection with the server");
+        case DioExceptionType.badResponse:
+          return _handleError(error.response?.data);
+        case DioExceptionType.sendTimeout:
+          return ApiErrorModel(
+            message: "Send timeout in connection with the server");
+        default:
+          return ApiErrorModel(message: "Something went wrong");
+      }
+    } else {
+      return ApiErrorModel(message: "Unknown error occurred");
+    }
+  }
+}
+// هات المسيدج والكود 
+// ودة الاساسي اللي معانا
+ApiErrorModel _handleError(dynamic data) {
+  return ApiErrorModel(
+    message: data['message'] ?? "Unknown error occurred",
+    code: data['code'],
+    // errors دية الماب اللي جايه من الباك اند فيها ال field  و ال ميسج بتاعه
+    errors: data['data'],
+  );
+}
 
+
+/*
 
 // TODO: wallahy I will refactor this .. Omar Ahmed
 enum DataSource {
@@ -176,3 +219,5 @@ class ApiInternalStatus {
   static const int success = 0;
   static const int failure = 1;
 }
+
+*/

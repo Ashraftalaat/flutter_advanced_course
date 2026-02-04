@@ -27,6 +27,7 @@ class _SpecialityListViewState extends State<SpecialityListView> {
         scrollDirection: Axis.horizontal,
         itemCount: widget.specializationDataList.length,
         itemBuilder: (context, index) {
+          //  GestureDetector اللي بيعمل ال كليك علي التخصص
           return GestureDetector(
             onTap: () {
               setState(() {

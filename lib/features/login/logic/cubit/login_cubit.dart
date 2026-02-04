@@ -60,7 +60,7 @@ class LoginCubit extends Cubit<LoginState> {
     //الـ UI بيسمع التغيير
     //BlocBuilder بيبني نفسه من جديد
     //UI بيعرض Loading indicator
-    emit(const LoginState.loading());
+    emit(const LoginState.loginloading());
     final response = await _loginRepo.login(
       LoginRequestBody(
         //بناخد النص من الـ Controllers:
@@ -78,10 +78,10 @@ class LoginCubit extends Cubit<LoginState> {
       //استخراج الـ token وحفظه في الـ Shared Preferences
       await saveUserToken(loginResponse.userData?.token ?? '');
       // إرسال Success State:
-      emit(LoginState.success(loginResponse));
-    }, failure: (error) {
+      emit(LoginState.loginsuccess(loginResponse));
+    }, failure: (apiErrorModel) {
       //emit(LoginState.error(...)): بنرسل Error state للـ UI
-      emit(LoginState.error(error: error.apiErrorModel.message ?? ''));
+      emit(LoginState.loginerror(apiErrorModel));
     });
   }
 
